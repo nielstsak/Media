@@ -1,0 +1,14 @@
+---
+// Fichier : media-finance-crypto/src/components/TweetEmbed.astro
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+<div class="my-6 flex justify-center w-full">
+  <blockquote class="twitter-tweet" data-dnt="true" data-theme="dark">
+    <a href={`https://twitter.com/x/status/${id}`}></a>
+  </blockquote>
+  <script type="text/partytown" async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
