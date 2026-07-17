@@ -1,0 +1,19 @@
+---
+// Fichier : media-finance-crypto/src/pages/reviews/[slug].astro
+import { getCollection } from 'astro:content';
+import ReviewLayout from '../../layouts/ReviewLayout.astro';
+
+export async function getStaticPaths() {
+  const reviewsEntries = await getCollection('reviews');
+  return reviewsEntries.map(entry => ({
+    params: { slug: entry.slug }, 
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<ReviewLayout frontmatter={entry.data}>
+  <Content />
+</ReviewLayout>

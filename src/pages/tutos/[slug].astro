@@ -1,0 +1,19 @@
+---
+// Fichier : media-finance-crypto/src/pages/tutos/[slug].astro
+import { getCollection } from 'astro:content';
+import TutoLayout from '../../layouts/TutoLayout.astro';
+
+export async function getStaticPaths() {
+  const tutosEntries = await getCollection('tutos');
+  return tutosEntries.map(entry => ({
+    params: { slug: entry.slug }, 
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+<TutoLayout frontmatter={entry.data}>
+  <Content />
+</TutoLayout>
