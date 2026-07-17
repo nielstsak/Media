@@ -6,36 +6,43 @@ import Disclaimer from '../components/Disclaimer.astro';
 const { frontmatter } = Astro.props;
 
 const getLevelColor = (level: string) => {
-  if (level === 'Débutant') return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
-  if (level === 'Intermédiaire') return 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400';
-  return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400';
+  if (level === 'Débutant') return 'bg-primary';
+  if (level === 'Intermédiaire') return 'bg-secondary';
+  return 'bg-accent';
 };
 ---
-<BaseLayout title={frontmatter.title} description={`Tutoriel: comment configurer et utiliser. Niveau: ${frontmatter.level}`}>
-  <article class="prose dark:prose-invert max-w-none">
-    <h1>{frontmatter.title}</h1>
-    
-    <div class="flex flex-wrap gap-4 mb-6 not-prose">
-      <span class={`px-3 py-1 rounded-full text-sm font-semibold ${getLevelColor(frontmatter.level)}`}>
-        {frontmatter.level}
-      </span>
-      <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-semibold">
-        ⏱ {frontmatter.read_time} min de lecture
-      </span>
-    </div>
+<BaseLayout title={frontmatter.title} description={`Tutoriel technique. Niveau: ${frontmatter.level}`}>
+  <article class="max-w-4xl mx-auto">
+    <header class="mb-16 text-center">
+      <h1 class="text-5xl md:text-7xl font-black mb-10 leading-tight uppercase bg-white border-8 border-dark p-6 shadow-brutal">{frontmatter.title}</h1>
+      
+      <div class="flex flex-wrap justify-center gap-6 mb-10">
+        <span class={`px-6 py-3 border-4 border-dark text-dark font-black text-lg uppercase shadow-brutal ${getLevelColor(frontmatter.level)}`}>
+          Niveau : {frontmatter.level}
+        </span>
+        <span class="px-6 py-3 bg-white border-4 border-dark text-dark font-black text-lg uppercase shadow-brutal">
+          ⏱ {frontmatter.read_time} min de lecture
+        </span>
+      </div>
+    </header>
 
     {frontmatter.tools && frontmatter.tools.length > 0 && (
-      <div class="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-lg mb-6 border dark:border-slate-700 not-prose">
-        <h3 class="font-bold text-lg mb-3">Matériel / Outils requis</h3>
-        <ul class="list-disc pl-5 space-y-1 text-slate-700 dark:text-slate-300">
-          {frontmatter.tools.map((tool: string) => <li>{tool}</li>)}
+      <div class="bg-dark text-white p-8 mb-12 border-8 border-dark shadow-brutal-lg">
+        <h3 class="font-black text-2xl uppercase mb-6 border-b-4 border-white pb-4 inline-block">Inventaire Requis</h3>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {frontmatter.tools.map((tool: string) => (
+            <li class="flex items-center gap-4 text-lg font-bold">
+              <span class="w-4 h-4 bg-primary border-2 border-white block"></span>
+              {tool}
+            </li>
+          ))}
         </ul>
       </div>
     )}
 
     <Disclaimer />
     
-    <div class="mt-8">
+    <div class="prose prose-xl prose-slate max-w-none mt-16 bg-white border-8 border-dark p-8 md:p-12 shadow-brutal-lg">
       <slot />
     </div>
   </article>

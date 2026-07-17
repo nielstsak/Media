@@ -7,17 +7,26 @@ import AffiliateBanner from '../components/AffiliateBanner.astro';
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout title={frontmatter.title_seo} description={frontmatter.description}>
-  <article class="prose dark:prose-invert max-w-none">
-    <h1>{frontmatter.title}</h1>
+  <article class="max-w-4xl mx-auto">
+    <header class="mb-16 text-center">
+      <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight uppercase border-b-8 border-dark pb-6 inline-block bg-primary px-6 shadow-brutal">{frontmatter.title}</h1>
+      <p class="text-2xl font-bold text-dark bg-white border-4 border-dark p-6 shadow-brutal">{frontmatter.description}</p>
+    </header>
+
     {frontmatter.image && (
-      <img src={frontmatter.image} alt={frontmatter.title} class="w-full h-auto rounded-lg mb-6 shadow-md" />
+      <img src={frontmatter.image} alt={frontmatter.title} class="w-full h-auto mb-16" />
     )}
+    
     <ScoreCard score={frontmatter.score} pros={frontmatter.pros} cons={frontmatter.cons} />
-    <div class="mt-8">
+    
+    <div class="prose prose-xl prose-slate max-w-none mt-16 bg-white border-8 border-dark p-8 md:p-12 shadow-brutal-lg">
       <slot />
     </div>
+
     {frontmatter.affiliate_link && (
-      <AffiliateBanner url={frontmatter.affiliate_link} />
+      <div class="mt-16 border-t-8 border-dark pt-16">
+        <AffiliateBanner url={frontmatter.affiliate_link} />
+      </div>
     )}
   </article>
 </BaseLayout>
