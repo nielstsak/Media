@@ -1,0 +1,36 @@
+---
+title: "Hardening d'un Noeud Web3 : Modèle OSI et Kernel Linux"
+level: "Expert"
+read_time: 18
+tools:
+  - "Serveur dédié (Debian/Ubuntu Server)"
+  - "Accès SSH par clés asymétriques (Ed25519)"
+  - "iptables / nftables"
+---
+import ImageZoom from '../../components/ImageZoom.astro';
+import FAQ from '../../components/FAQ.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+
+La compromission d'un noeud RPC ou validateur expose l'infrastructure à une exfiltration de clés privées ou à des attaques par déni de service. La sécurisation s'opère par la restriction stricte des couches du modèle OSI.
+
+<Disclaimer />
+
+## Couche 3 (Réseau) et Couche 4 (Transport)
+
+L'isolation du noyau Linux débute par la configuration des tables de routage. Par défaut, le noyau accepte des requêtes sur l'ensemble des protocoles de transport.
+
+1.  **Désactivation des protocoles inutilisés :** Le protocole UDP n'est requis que pour la découverte des pairs (P2P). L'accès à l'API RPC (TCP) doit être limité par IP.
+2.  **Configuration iptables :** Définissez une politique DROP par défaut sur la chaîne INPUT.
+
+<ImageZoom src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1000&auto=format&fit=crop" alt="Matrice binaire de sécurité réseau" />
+
+## Mécanismes du Kernel Linux
+
+Les paramètres `sysctl` régissent le comportement de la pile TCP/IP du noyau. 
+
+Il est impératif d'activer la protection contre les attaques SYN flood (`net.ipv4.tcp_syncookies = 1`) et de désactiver l'acceptation des paquets routés par la source (`net.ipv4.conf.all.accept_source_route = 0`). Ces modifications s'appliquent dans `/etc/sysctl.conf`.
+
+<FAQ items={[
+  {question: "Dois-je déployer une infrastructure Active Directory pour gérer mes noeuds ?", answer: "Non. Une architecture Active Directory complexifie la surface d'attaque. L'authentification par clés SSH et un bastion (Jump Host) sont suffisants."},
+  {question: "Comment limiter la surface d'attaque de l'API RPC ?", answer: "Ne bindez jamais le port RPC (ex: 8545) sur 0.0.0.0. Bindez sur 127.0.0.1 et utilisez un tunnel SSH ou un reverse proxy avec TLS mutualisé (mTLS)."}
+]} />

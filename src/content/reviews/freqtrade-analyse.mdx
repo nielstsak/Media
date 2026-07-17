@@ -1,0 +1,37 @@
+---
+title_seo: "Avis Freqtrade 2026 : Architecture de Trading Quantitatif"
+title: "Freqtrade : Déploiement et Stratégies Quantitatives"
+description: "Analyse chirurgicale de l'architecture Freqtrade. Évaluation des capacités d'exploitation des marges croisées et intégrité du moteur de backtest."
+score: 9
+affiliate_link: "https://freqtrade.io"
+pros:
+  - "Moteur de backtest exempt de biais look-ahead"
+  - "Support natif du crossed margin via API"
+  - "Intégration FreqAI pour le machine learning"
+cons:
+  - "Exige une maîtrise absolue de Python et Pandas"
+  - "Configuration stricte de la gestion d'état"
+---
+import ImageZoom from '../../components/ImageZoom.astro';
+import FAQ from '../../components/FAQ.astro';
+
+L'infrastructure de trading algorithmique nécessite un moteur de données déterministe. Cette itération technique documente l'implémentation de Freqtrade dans un environnement de production ciblant les marchés perpétuels.
+
+## Intégrité du Pipeline de Données
+
+Le resample des données historiques (OHLCV) dans les frameworks quantitatifs introduit fréquemment des failles logiques. L'architecture de Freqtrade isole la logique de calcul des indicateurs de la logique de simulation d'ordres. 
+
+Le flux de traitement garantit l'absence totale de biais *look-ahead*. Les dataframes passés aux méthodes `populate_indicators` et `populate_entry_trend` ne contiennent aucune donnée future par rapport au tick évalué par la boucle de simulation.
+
+<ImageZoom src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Interface de terminal affichant un flux de données quantitatives" />
+
+## Architecture d'Exécution : Crossed Margin
+
+L'exploitation des carnets d'ordres sur les marchés perpétuels exige une gestion du risque centralisée. Contrairement aux modèles ségréguant les portefeuilles par paire (isolated margin), Freqtrade permet une allocation dynamique du capital via le mode *crossed margin*.
+
+L'API de l'exchange (ex: Binance ou Bybit) est interrogée via l'interface CCXT. Le calcul du *Drawdown* et du risque de liquidation est évalué sur l'équité globale du compte, permettant des stratégies de couverture inter-actifs.
+
+<FAQ items={[
+  {question: "Le framework FreqAI introduit-il de la latence ?", answer: "La latence dépend du modèle d'inférence. Les modèles compilés avec Numba ou utilisant des tenseurs optimisés maintiennent le tick-rate sous les 50ms."},
+  {question: "Peut-on utiliser Freqtrade pour du spot ?", answer: "Oui, mais l'efficacité du capital est sous-optimale comparée à l'utilisation du crossed margin sur les contrats perpétuels."}
+]} />
