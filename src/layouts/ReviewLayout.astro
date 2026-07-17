@@ -1,0 +1,23 @@
+---
+// Fichier : media-finance-crypto/src/layouts/ReviewLayout.astro
+import BaseLayout from './BaseLayout.astro';
+import ScoreCard from '../components/ScoreCard.astro';
+import AffiliateBanner from '../components/AffiliateBanner.astro';
+
+const { frontmatter } = Astro.props;
+---
+<BaseLayout title={frontmatter.title_seo} description={frontmatter.description}>
+  <article class="prose dark:prose-invert max-w-none">
+    <h1>{frontmatter.title}</h1>
+    {frontmatter.image && (
+      <img src={frontmatter.image} alt={frontmatter.title} class="w-full h-auto rounded-lg mb-6 shadow-md" />
+    )}
+    <ScoreCard score={frontmatter.score} pros={frontmatter.pros} cons={frontmatter.cons} />
+    <div class="mt-8">
+      <slot />
+    </div>
+    {frontmatter.affiliate_link && (
+      <AffiliateBanner url={frontmatter.affiliate_link} />
+    )}
+  </article>
+</BaseLayout>

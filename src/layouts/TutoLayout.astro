@@ -1,0 +1,42 @@
+---
+// Fichier : media-finance-crypto/src/layouts/TutoLayout.astro
+import BaseLayout from './BaseLayout.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+
+const { frontmatter } = Astro.props;
+
+const getLevelColor = (level: string) => {
+  if (level === 'Débutant') return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
+  if (level === 'Intermédiaire') return 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400';
+  return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400';
+};
+---
+<BaseLayout title={frontmatter.title} description={`Tutoriel: comment configurer et utiliser. Niveau: ${frontmatter.level}`}>
+  <article class="prose dark:prose-invert max-w-none">
+    <h1>{frontmatter.title}</h1>
+    
+    <div class="flex flex-wrap gap-4 mb-6 not-prose">
+      <span class={`px-3 py-1 rounded-full text-sm font-semibold ${getLevelColor(frontmatter.level)}`}>
+        {frontmatter.level}
+      </span>
+      <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-sm font-semibold">
+        ⏱ {frontmatter.read_time} min de lecture
+      </span>
+    </div>
+
+    {frontmatter.tools && frontmatter.tools.length > 0 && (
+      <div class="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-lg mb-6 border dark:border-slate-700 not-prose">
+        <h3 class="font-bold text-lg mb-3">Matériel / Outils requis</h3>
+        <ul class="list-disc pl-5 space-y-1 text-slate-700 dark:text-slate-300">
+          {frontmatter.tools.map((tool: string) => <li>{tool}</li>)}
+        </ul>
+      </div>
+    )}
+
+    <Disclaimer />
+    
+    <div class="mt-8">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

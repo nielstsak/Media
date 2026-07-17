@@ -1,0 +1,35 @@
+---
+// Fichier : media-finance-crypto/src/layouts/NewsLayout.astro
+import BaseLayout from './BaseLayout.astro';
+
+const { frontmatter } = Astro.props;
+---
+<BaseLayout title={frontmatter.title} description={`Actualité: ${frontmatter.title}`}>
+  <article class="prose dark:prose-invert max-w-none">
+    <h1>{frontmatter.title}</h1>
+    
+    <div class="flex items-center gap-3 mb-6 not-prose text-sm text-slate-500 dark:text-slate-400">
+      <time datetime={frontmatter.date}>
+        {new Date(frontmatter.date).toLocaleDateString('fr-FR', { 
+          year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        })}
+      </time>
+      <span>•</span>
+      <a href={frontmatter.source_link} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline dark:text-blue-400">
+        Source Officielle
+      </a>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8 not-prose">
+      {frontmatter.tags.map((tag: string) => (
+        <span class="bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-2 py-1 rounded text-xs font-medium">
+          #{tag}
+        </span>
+      ))}
+    </div>
+
+    <div class="mt-4">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
