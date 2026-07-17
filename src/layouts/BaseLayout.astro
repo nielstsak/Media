@@ -1,0 +1,23 @@
+---
+// Fichier : media-finance-crypto/src/layouts/BaseLayout.astro
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <script type="text/partytown" src="https://example-bitmedia-script.js"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50">
+    <main class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+      <slot />
+    </main>
+  </body>
+</html>
