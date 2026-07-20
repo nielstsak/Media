@@ -1,85 +1,62 @@
 ---
-// Fichier : media-finance-crypto/src/pages/index.astro
-import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
-const news = await getCollection('news');
 const reviews = await getCollection('reviews');
 const tutos = await getCollection('tutos');
+const news = await getCollection('news');
 ---
-<BaseLayout title="Accueil - Media Finance & Crypto" description="Actualités, analyses et tutoriels de l'écosystème web3">
-  
-  <section class="mb-24 text-center max-w-3xl mx-auto">
-    <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-sand leading-tight">
-      L'intelligence algorithmique au service du Web3.
-    </h1>
-    <p class="text-lg md:text-xl font-medium text-sand">
-      Recherche quantitative, infrastructure réseau et analyses de protocoles.
-    </p>
+<BaseLayout titreDocument="Accueil" descriptionDocument="L'intelligence algorithmique au service du Web3">
+  <section class="text-center my-16">
+    <h1 class="text-h1 font-bold text-[#DFD0B8] mb-4">L'intelligence algorithmique<br/>au service du Web3.</h1>
+    <p class="text-[#DFD0B8] text-lg">Recherche quantitative, infrastructure réseau et analyses de protocoles.</p>
   </section>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-    
-    <section class="lg:col-span-2 space-y-16">
-      <div id="analyses" class="scroll-mt-24">
-        <div class="flex items-center justify-between mb-8 border-b border-surface pb-4">
-          <h2 class="text-2xl font-bold text-sand tracking-tight">Recherche & Analyses</h2>
-        </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-2 flex flex-col gap-12">
+      <section>
+        <h2 class="text-h2 font-bold text-[#DFD0B8] mb-4 border-b border-[#948979] pb-2">Recherche & Analyses</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {reviews.map(post => (
-            <a href={`/reviews/${post.slug}`} class="group flex flex-col bg-surface border border-surface hover:border-accent rounded-xl p-6 transition-all duration-300 h-full">
-              <h3 class="text-xl font-semibold text-sand group-hover:text-sand transition-colors leading-snug mb-4">{post.data.title}</h3>
-              <p class="font-medium text-sand text-sm line-clamp-3 mt-auto leading-relaxed">{post.data.description}</p>
+          {reviews.slice(0, 2).map(entry => (
+            <a href={`/reviews/${entry.slug}`} class="card-interactive p-6 h-full text-left">
+              <h3 class="text-h4 font-bold text-[#DFD0B8] mb-4">{entry.data.title}</h3>
+              <p class="text-sm text-[#DFD0B8] opacity-80">{entry.data.description}</p>
             </a>
           ))}
         </div>
-      </div>
+      </section>
 
-      <div id="tutoriels" class="scroll-mt-24">
-        <div class="flex items-center justify-between mb-8 border-b border-surface pb-4">
-          <h2 class="text-2xl font-bold text-sand tracking-tight">Ingénierie & Tutoriels</h2>
-        </div>
+      <section>
+        <h2 class="text-h2 font-bold text-[#DFD0B8] mb-4 border-b border-[#948979] pb-2">Ingénierie & Tutoriels</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {tutos.map(post => (
-            <a href={`/tutos/${post.slug}`} class="group flex flex-col bg-surface border border-surface hover:border-accent rounded-xl p-6 transition-all duration-300 h-full">
-              <h3 class="text-xl font-semibold text-sand transition-colors mb-4">{post.data.title}</h3>
-              <div class="mt-auto pt-4 border-t border-deep flex items-center justify-between">
-                <span class="text-sm font-medium text-accent group-hover:text-sand transition-colors">Consulter le guide</span>
-                <svg class="w-4 h-4 text-accent group-hover:text-sand transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          {tutos.slice(0, 2).map(entry => (
+            <a href={`/tutos/${entry.slug}`} class="card-interactive p-6 h-full text-left">
+              <h3 class="text-h4 font-bold text-[#DFD0B8] mb-4">{entry.data.title}</h3>
+              <div class="mt-auto pt-4 border-t border-[#948979]/30 flex justify-between items-center">
+                <span class="text-xs text-[#DFD0B8]">Consulter le guide</span>
+                <span class="text-[#DFD0B8]">→</span>
               </div>
             </a>
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <aside id="news" class="scroll-mt-24">
-      <div class="sticky top-24 bg-surface border border-surface rounded-xl p-6">
-        <h2 class="text-lg font-bold text-sand mb-6 flex items-center gap-2">
-          <div class="w-2 h-2 rounded-full bg-sand"></div>
-          Flux Réseau
-        </h2>
-        <div class="space-y-5">
-          {news.map(post => (
-            <article class="border-b border-deep pb-5 last:border-0 last:pb-0">
-              <a href={`/news/${post.slug}`} class="block text-sm font-semibold text-sand leading-snug mb-2 hover:text-accent transition-colors">
-                {post.data.title}
-              </a>
-              <div class="flex items-center justify-between">
-                <time class="text-xs font-medium text-sand">
-                  {new Date(post.data.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })}
-                </time>
-                <div class="flex gap-2">
-                  {post.data.tags.slice(0, 1).map((tag: string) => (
-                    <span class="text-[10px] font-bold text-deep bg-sand px-2 py-0.5 rounded-md">{tag}</span>
-                  ))}
-                </div>
+    <div class="lg:col-span-1">
+      <section class="card-interactive p-6 h-full">
+        <h2 class="text-h3 font-bold text-[#DFD0B8] mb-6">Flux Réseau</h2>
+        <div class="flex flex-col gap-6">
+          {news.slice(0, 4).map(entry => (
+            <a href={`/news/${entry.slug}`} class="group block border-b border-[#948979]/30 pb-4 last:border-0 last:pb-0 outline-none">
+              <h3 class="text-sm font-bold text-[#DFD0B8] group-hover:text-white transition-colors mb-2">{entry.data.title}</h3>
+              <div class="flex justify-between items-center text-xs text-[#DFD0B8] opacity-70">
+                <time>{entry.data.pubDate}</time>
+                <span>{entry.data.ticker}</span>
               </div>
-            </article>
+            </a>
           ))}
         </div>
-      </div>
-    </aside>
-
+      </section>
+    </div>
   </div>
 </BaseLayout>
