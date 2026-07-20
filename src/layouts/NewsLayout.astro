@@ -1,39 +1,21 @@
 ---
-// Fichier : media-finance-crypto/src/layouts/NewsLayout.astro
 import BaseLayout from './BaseLayout.astro';
 
 const { frontmatter } = Astro.props;
 ---
-<BaseLayout title={frontmatter.title} description={`Actualité: ${frontmatter.title}`}>
-  <article class="max-w-3xl mx-auto">
-    <header class="mb-10 border-b border-surface pb-8">
-      <div class="flex flex-wrap gap-3 mb-6">
-        {frontmatter.tags.map((tag: string) => (
-          <span class="bg-surface text-sand px-3 py-1 text-xs font-bold rounded-md border border-surface">
-            #{tag}
-          </span>
-        ))}
-      </div>
-      
-      <h1 class="text-3xl md:text-5xl font-bold mb-6 leading-tight text-sand">{frontmatter.title}</h1>
-      
-      <div class="flex flex-col sm:flex-row sm:items-center gap-4 text-sm font-medium text-sand">
-        <time datetime={frontmatter.date} class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-          {new Date(frontmatter.date).toLocaleDateString('fr-FR', { 
-            year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
-          })}
-        </time>
-        <span class="hidden sm:inline text-surface">•</span>
-        <a href={frontmatter.source_link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 text-accent hover:text-sand transition-colors">
-          Source d'origine
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-        </a>
-      </div>
-    </header>
 
-    <div class="prose lg:prose-lg max-w-none mt-10">
-      <slot />
-    </div>
-  </article>
+<BaseLayout titreDocument={frontmatter.title} descriptionDocument={frontmatter.description} typeRoute="news" donneesFrontmatter={frontmatter}>
+  <section class="max-w-5xl mx-auto w-full">
+    <aside class="grid grid-cols-[auto_1fr_auto] items-center gap-6 bg-[#393E46] border border-[#948979] p-4 shadow-[-4px_0_10px_rgba(0,0,0,0.2)]">
+      <time datetime={frontmatter.pubDate} class="font-mono text-sm text-[#DFD0B8] font-bold whitespace-nowrap">
+        {frontmatter.pubDate}
+      </time>
+      <div class="text-[#DFD0B8] text-base leading-relaxed">
+        <slot />
+      </div>
+      <span class="bg-[#222831] border border-[#948979] px-3 py-1 font-mono text-sm font-bold text-white uppercase tracking-widest whitespace-nowrap">
+        {frontmatter.ticker}
+      </span>
+    </aside>
+  </section>
 </BaseLayout>
