@@ -1,0 +1,12 @@
+<div class="w-[728px] h-[90px] bg-[#393E46] animate-pulse mx-auto flex justify-center items-center conteneur-publicitaire">
+  <slot />
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cadresEnfants = document.querySelectorAll('.conteneur-publicitaire iframe');
+    cadresEnfants.forEach(cadre => {
+      cadre.setAttribute('type', 'text/partytown');
+    });
+  });
+</script>
