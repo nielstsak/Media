@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 
 <BaseLayout titreDocument={frontmatter.title} descriptionDocument={frontmatter.description} typeRoute="news" donneesFrontmatter={frontmatter}>
   <section class="max-w-5xl mx-auto w-full">
-    <aside class="grid grid-cols-[auto_1fr_auto] items-center gap-6 bg-[#393E46] border border-[#948979] p-4 shadow-[-4px_0_10px_rgba(0,0,0,0.2)]">
+    <aside class="grid grid-cols-[auto_1fr_auto] items-center gap-6 bg-[#393E46] border border-[#948979] p-4 shadow-[-4px_0_10px_rgba(0,0,0,0.2)] will-change-transform" style="transform: translateY(calc(var(--scroll-y, 0px) * 0.05));">
       <time datetime={frontmatter.pubDate} class="font-mono text-sm text-[#DFD0B8] font-bold whitespace-nowrap">
         {frontmatter.pubDate}
       </time>

@@ -3,21 +3,28 @@ const { command } = Astro.props;
 const elementId = `term-${Math.random().toString(36).substring(2, 9)}`;
 ---
 
-<div class="bg-[#222831] border-l-4 border-[#948979] p-4 flex justify-between items-center my-4">
-  <input type="text" value={command} readonly class="bg-transparent text-[#DFD0B8] font-mono text-sm w-full outline-none" id={elementId} />
-  <button data-copy={elementId} class="ml-4 bg-[#393E46] px-3 py-1 text-xs text-[#DFD0B8] uppercase font-bold cursor-pointer">Copier</button>
+<div class="relative group my-4 p-[2px]">
+  <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
+    <rect x="0" y="0" width="100%" height="100%" fill="none" stroke="#948979" stroke-width="2" stroke-dasharray="2000" stroke-dashoffset="2000" class="transition-all duration-700 ease-in-out group-hover:stroke-dashoffset-0" />
+  </svg>
+  <div class="bg-[#222831] p-4 flex justify-between items-center relative z-10">
+    <input type="text" value={command} readonly class="bg-transparent text-[#DFD0B8] font-mono text-sm w-full outline-none" id={elementId} />
+    <button data-copy={elementId} class="ml-4 bg-[#393E46] px-3 py-1 text-xs text-[#DFD0B8] uppercase font-bold cursor-pointer hover:bg-[#DFD0B8] hover:text-[#222831] transition-colors">Copier</button>
+  </div>
 </div>
 
 <script>
-  const buttons = document.querySelectorAll('[data-copy]');
-  buttons.forEach(button => {
-    button.addEventListener('click', () => {
-      const targetId = button.getAttribute('data-copy');
-      const input = document.getElementById(targetId) as HTMLInputElement;
-      if (input) {
-        input.select();
-        navigator.clipboard.writeText(input.value);
-      }
+  document.addEventListener('astro:page-load', () => {
+    const buttons = document.querySelectorAll('[data-copy]');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-copy');
+        const input = document.getElementById(targetId) as HTMLInputElement;
+        if (input) {
+          input.select();
+          navigator.clipboard.writeText(input.value);
+        }
+      });
     });
   });
 </script>

@@ -1,9 +1,12 @@
-<div class="w-[728px] h-[90px] bg-[#393E46] animate-pulse mx-auto flex justify-center items-center conteneur-publicitaire">
+---
+---
+<div class="w-[728px] h-[90px] bg-[#393E46] mx-auto flex justify-center items-center conteneur-publicitaire relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-transparent via-[#DFD0B8]/10 to-transparent animate-shimmer"></div>
   <slot />
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const cadresEnfants = document.querySelectorAll('.conteneur-publicitaire iframe');
     cadresEnfants.forEach(cadre => {
       cadre.setAttribute('type', 'text/partytown');
