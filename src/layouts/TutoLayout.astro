@@ -12,7 +12,7 @@ const { frontmatter } = Astro.props;
     </header>
 
     {frontmatter.tools && frontmatter.tools.length > 0 && (
-      <div class="bg-surface border border-surface p-6 rounded-xl mb-8 shadow-sm">
+      <div class="bg-surface border border-surface p-6 rounded-xl mb-8">
         <h3 class="font-bold text-lg mb-4 text-sand border-b border-deep pb-2 inline-block">Inventaire Requis</h3>
         <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {frontmatter.tools.map((tool: string) => (
@@ -27,7 +27,7 @@ const { frontmatter } = Astro.props;
 
     <Disclaimer />
     
-    <div class="prose prose-slate lg:prose-lg max-w-none mt-12">
+    <div class="prose lg:prose-lg max-w-none mt-12">
       <slot />
     </div>
   </article>
