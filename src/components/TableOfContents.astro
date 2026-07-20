@@ -1,0 +1,16 @@
+---
+const { headings } = Astro.props;
+const filteredHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+<nav class="sticky top-4 bg-[#393E46] p-4 border border-[#948979]">
+  <ul class="flex flex-col gap-2">
+    {filteredHeadings.map((heading) => (
+      <li class={`pl-${(heading.depth - 2) * 4}`}>
+        <a href={`#${heading.slug}`} class="text-[#DFD0B8] hover:text-white text-sm">
+          {heading.text}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

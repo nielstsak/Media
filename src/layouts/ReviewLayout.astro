@@ -1,32 +1,17 @@
 ---
-// Fichier : media-finance-crypto/src/layouts/ReviewLayout.astro
 import BaseLayout from './BaseLayout.astro';
-import ScoreCard from '../components/ScoreCard.astro';
-import AffiliateBanner from '../components/AffiliateBanner.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 ---
-<BaseLayout title={frontmatter.title_seo} description={frontmatter.description}>
-  <article class="max-w-3xl mx-auto">
-    <header class="mb-12 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-sand">{frontmatter.title}</h1>
-      <p class="text-lg md:text-xl font-medium text-sand">{frontmatter.description}</p>
-    </header>
 
-    {frontmatter.image && (
-      <img src={frontmatter.image} alt={frontmatter.title} class="w-full h-auto mb-12 rounded-xl border border-surface" />
-    )}
-    
-    <ScoreCard score={frontmatter.score} pros={frontmatter.pros} cons={frontmatter.cons} />
-    
-    <div class="prose lg:prose-lg max-w-none mt-12">
+<BaseLayout titreDocument={frontmatter.title} descriptionDocument={frontmatter.description} typeRoute="reviews" donneesFrontmatter={frontmatter}>
+  <div class="flex flex-col md:flex-row gap-6">
+    <aside class="md:w-1/4">
+      <TableOfContents headings={headings} />
+    </aside>
+    <article class="md:w-3/4">
       <slot />
-    </div>
-
-    {frontmatter.affiliate_link && (
-      <div class="mt-16 border-t border-surface pt-12">
-        <AffiliateBanner url={frontmatter.affiliate_link} />
-      </div>
-    )}
-  </article>
+    </article>
+  </div>
 </BaseLayout>

@@ -1,34 +1,17 @@
 ---
-// Fichier : media-finance-crypto/src/layouts/TutoLayout.astro
 import BaseLayout from './BaseLayout.astro';
-import Disclaimer from '../components/Disclaimer.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 ---
-<BaseLayout title={frontmatter.title} description={`Tutoriel technique : ${frontmatter.title}`}>
-  <article class="max-w-3xl mx-auto">
-    <header class="mb-10 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-sand">{frontmatter.title}</h1>
-    </header>
 
-    {frontmatter.tools && frontmatter.tools.length > 0 && (
-      <div class="bg-surface border border-surface p-6 rounded-xl mb-8">
-        <h3 class="font-bold text-lg mb-4 text-sand border-b border-deep pb-2 inline-block">Inventaire Requis</h3>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {frontmatter.tools.map((tool: string) => (
-            <li class="flex items-center gap-2 text-sm font-medium text-sand">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
-              {tool}
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-
-    <Disclaimer />
-    
-    <div class="prose lg:prose-lg max-w-none mt-12">
+<BaseLayout titreDocument={frontmatter.title} descriptionDocument={frontmatter.description} typeRoute="tutos" donneesFrontmatter={frontmatter}>
+  <div class="flex flex-col md:flex-row gap-6">
+    <aside class="md:w-1/4">
+      <TableOfContents headings={headings} />
+    </aside>
+    <article class="md:w-3/4">
       <slot />
-    </div>
-  </article>
+    </article>
+  </div>
 </BaseLayout>
