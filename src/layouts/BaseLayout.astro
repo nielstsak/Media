@@ -1,47 +1,39 @@
 ---
-// Fichier : media-finance-crypto/src/layouts/BaseLayout.astro
-interface Props {
-  title: string;
-  description: string;
-}
+import Search from '../components/Search.astro';
 
-const { title, description } = Astro.props;
+// Extraction des métadonnées injectées par les vues enfants lors de la compilation
+const { titreDocument, descriptionDocument } = Astro.props;
 ---
-<html lang="fr" class="scroll-smooth antialiased">
+
+<!DOCTYPE html>
+<html lang="fr">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <script type="text/partytown" src="https://example-bitmedia-script.js"></script>
-    <style is:global>
-      ::selection { background-color: #DFD0B8; color: #222831; }
-    </style>
+    <title>{titreDocument}</title>
+    <meta name="description" content={descriptionDocument} />
   </head>
-  <body class="bg-deep text-sand min-h-screen flex flex-col font-sans selection:bg-sand selection:text-deep">
-    <header class="sticky top-0 z-40 w-full bg-deep/95 backdrop-blur-md border-b border-surface">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="/" class="text-lg font-bold tracking-tight text-sand flex items-center gap-2">
-          <div class="w-2 h-2 rounded-full bg-accent"></div>
-          MediaCrypto
-        </a>
-        <nav class="hidden md:flex gap-8 font-medium text-sm text-sand">
-          <a href="/" class="hover:text-accent transition-colors">Accueil</a>
-          <a href="/#analyses" class="hover:text-accent transition-colors">Analyses</a>
-          <a href="/#tutoriels" class="hover:text-accent transition-colors">Tutoriels</a>
-          <a href="/#news" class="hover:text-accent transition-colors">News</a>
-        </nav>
-      </div>
+  <body class="bg-[#222831] text-[#DFD0B8] min-h-screen flex flex-col font-sans">
+    
+    <header data-pagefind-ignore class="bg-[#393E46] p-6 border-b-4 border-[#948979] flex justify-between items-center shadow-[4px_4px_0px_0px_#948979]">
+      <nav>
+        <ul class="flex gap-6">
+          <li><a href="/" class="hover:text-white font-bold uppercase tracking-wider">Accueil</a></li>
+          <li><a href="/news" class="hover:text-white font-bold uppercase tracking-wider">Actualités</a></li>
+          <li><a href="/tutos" class="hover:text-white font-bold uppercase tracking-wider">Tutoriels</a></li>
+        </ul>
+      </nav>
+      
+      <Search />
     </header>
 
-    <main class="flex-grow w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <main class="flex-grow p-6 lg:p-12 max-w-6xl mx-auto w-full">
       <slot />
     </main>
 
-    <footer class="border-t border-surface bg-deep py-12 mt-auto">
-      <div class="max-w-6xl mx-auto px-4 text-center text-sm font-medium text-sand">
-        &copy; {new Date().getFullYear()} Media Finance & Crypto.
-      </div>
+    <footer data-pagefind-ignore class="bg-[#393E46] p-6 border-t-4 border-[#948979] mt-auto text-center shadow-[-4px_-4px_0px_0px_#948979]">
+      <p class="text-sm font-bold tracking-widest uppercase">&copy; 2026 Media Finance & Crypto</p>
     </footer>
+    
   </body>
 </html>
