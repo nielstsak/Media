@@ -15,32 +15,32 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <script type="text/partytown" src="https://example-bitmedia-script.js"></script>
     <style is:global>
-      ::selection { background-color: #000000; color: #fbbf24; }
-      body { background-image: radial-gradient(#000000 1px, transparent 1px); background-size: 24px 24px; background-color: #ffffff; }
+      ::selection { background-color: #DFD0B8; color: #222831; }
     </style>
   </head>
-  <body class="text-dark min-h-screen flex flex-col font-mono selection:bg-dark selection:text-primary">
-    <header class="sticky top-0 z-40 w-full bg-primary border-b-8 border-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="/" class="text-3xl font-black uppercase tracking-tighter text-dark bg-white border-4 border-dark px-3 py-1 shadow-brutal hover:shadow-brutal-hover hover:translate-x-[4px] hover:translate-y-[4px] transition-all">
-          MEDIA_CRYPTO
+  <body class="bg-deep text-sand min-h-screen flex flex-col font-sans selection:bg-sand selection:text-deep">
+    <header class="sticky top-0 z-40 w-full bg-deep/90 backdrop-blur-md border-b border-surface">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="/" class="text-lg font-bold tracking-tight text-sand flex items-center gap-2">
+          <div class="w-2 h-2 rounded-full bg-accent"></div>
+          MediaCrypto
         </a>
-        <nav class="hidden md:flex gap-8 font-black text-lg uppercase tracking-tight">
-          <a href="/" class="hover:bg-dark hover:text-white px-3 py-1 border-4 border-transparent hover:border-dark transition-colors">Accueil</a>
-          <a href="#" class="hover:bg-dark hover:text-white px-3 py-1 border-4 border-transparent hover:border-dark transition-colors">Analyses</a>
-          <a href="#" class="hover:bg-dark hover:text-white px-3 py-1 border-4 border-transparent hover:border-dark transition-colors">Tutoriels</a>
-          <a href="#" class="hover:bg-dark hover:text-white px-3 py-1 border-4 border-transparent hover:border-dark transition-colors">News</a>
+        <nav class="hidden md:flex gap-8 font-medium text-sm text-sand">
+          <a href="/" class="hover:text-accent transition-colors">Accueil</a>
+          <a href="#" class="hover:text-accent transition-colors">Analyses</a>
+          <a href="#" class="hover:text-accent transition-colors">Tutoriels</a>
+          <a href="#" class="hover:text-accent transition-colors">News</a>
         </nav>
       </div>
     </header>
 
-    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-white border-x-8 border-dark">
+    <main class="flex-grow w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <slot />
     </main>
 
-    <footer class="border-t-8 border-dark bg-secondary py-12 mt-auto">
-      <div class="max-w-7xl mx-auto px-4 text-center font-black text-lg uppercase text-dark">
-        &copy; {new Date().getFullYear()} Media Finance & Crypto. Architecture statique propulsée par Astro.
+    <footer class="border-t border-surface bg-deep py-12 mt-auto">
+      <div class="max-w-6xl mx-auto px-4 text-center text-sm font-medium text-sand">
+        &copy; {new Date().getFullYear()} Media Finance & Crypto.
       </div>
     </footer>
   </body>

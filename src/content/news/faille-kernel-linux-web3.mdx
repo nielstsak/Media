@@ -1,0 +1,26 @@
+---
+title: "Vulnérabilité Kernel Linux : Impact sur l'Infrastructure RPC"
+source_link: "https://nvd.nist.gov/"
+tags:
+  - "Cybersécurité"
+  - "Kernel"
+  - "Infrastructure"
+date: 2026-07-17T21:26:00Z
+---
+{/* Fichier : media-finance-crypto/src/content/news/faille-kernel-linux-web3.mdx */}
+import TLDR from '../../components/TLDR.astro';
+import TweetEmbed from '../../components/TweetEmbed.astro';
+
+<TLDR points={[
+  "Découverte d'une vulnérabilité d'élévation de privilèges (CVE) dans la couche réseau du Kernel Linux.",
+  "Les noeuds validateurs et fournisseurs RPC exposant des ports non filtrés sont directement ciblés.",
+  "Application immédiate des correctifs sysctl et nftables requise."
+]} />
+
+Une faille critique identifiée dans la gestion des sockets au sein des noyaux Linux récents permet à un attaquant non authentifié de provoquer un dépassement de tampon sur la couche de transport.
+
+L'exploitation de cette faille sur l'infrastructure Web3 entraîne un déni de service (DDoS) instantané des daemons de synchronisation blockchain, isolant le noeud du réseau pair-à-pair.
+
+<TweetEmbed id="1710000000000000000" />
+
+La remédiation technique implique le déploiement du dernier patch de sécurité du mainteneur de la distribution (apt upgrade linux-image-generic) et un redémarrage à froid de la machine physique. Les configurations s'appuyant exclusivement sur des règles de pare-feu applicatif (Couche 7) restent vulnérables.

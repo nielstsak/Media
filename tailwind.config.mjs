@@ -4,56 +4,44 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
-      boxShadow: {
-        'brutal': '6px 6px 0px 0px #000000',
-        'brutal-lg': '12px 12px 0px 0px #000000',
-        'brutal-hover': '2px 2px 0px 0px #000000',
-      },
       colors: {
-        base: '#ffffff',
-        primary: '#fbbf24', // Amber 400
-        secondary: '#38bdf8', // Light Blue 400
-        accent: '#f472b6', // Pink 400
-        dark: '#000000',
+        deep: '#222831',
+        surface: '#393E46',
+        accent: '#948979',
+        sand: '#DFD0B8',
       },
-      typography: {
+      typography: (theme) => ({
         DEFAULT: {
           css: {
-            '--tw-prose-body': '#000000',
-            '--tw-prose-headings': '#000000',
-            '--tw-prose-links': '#000000',
-            '--tw-prose-bold': '#000000',
-            '--tw-prose-quotes': '#000000',
-            'p': {
+            '--tw-prose-body': theme('colors.sand'),
+            '--tw-prose-headings': theme('colors.sand'),
+            '--tw-prose-links': theme('colors.sand'),
+            '--tw-prose-bold': theme('colors.sand'),
+            '--tw-prose-quotes': theme('colors.sand'),
+            '--tw-prose-counters': theme('colors.accent'),
+            '--tw-prose-bullets': theme('colors.accent'),
+            '--tw-prose-hr': theme('colors.surface'),
+            '--tw-prose-th-borders': theme('colors.surface'),
+            '--tw-prose-td-borders': theme('colors.surface'),
+            'p': { 
               fontWeight: '500',
+              lineHeight: '1.7',
             },
             'a': {
-              borderBottom: '4px solid #000000',
               textDecoration: 'none',
-              fontWeight: '900',
-              transition: 'all 0.2s ease-in-out',
+              borderBottom: `1px solid ${theme('colors.accent')}`,
+              transition: 'border-color 0.2s ease',
             },
             'a:hover': {
-              backgroundColor: '#fbbf24',
+              borderColor: theme('colors.sand'),
             },
             'h1, h2, h3, h4': {
-              fontWeight: '900',
-              textTransform: 'uppercase',
-              letterSpacing: '-0.025em',
-            },
-            'img': {
-              border: '6px solid #000000',
-              boxShadow: '6px 6px 0px 0px #000000',
-              borderRadius: '0',
-            },
-            'pre': {
-              border: '6px solid #000000',
-              boxShadow: '6px 6px 0px 0px #000000',
-              borderRadius: '0',
+              fontWeight: '700',
+              letterSpacing: '-0.01em',
             },
           },
         },
-      },
+      }),
     },
   },
   plugins: [

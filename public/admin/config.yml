@@ -1,49 +1,51 @@
-# Fichier : media-finance-crypto/public/admin/config.yml
-backend:
-  name: github
-  repo: utilisateur/repo-nom
-  branch: main
-
-media_folder: "public/images"
-public_folder: "/images"
-
-collections:
-  - name: "reviews"
-    label: "Analyses / Reviews"
-    folder: "src/content/reviews"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Titre SEO", name: "title_seo", widget: "string"}
-      - {label: "Titre Affichage", name: "title", widget: "string"}
-      - {label: "Description Courte", name: "description", widget: "text"}
-      - {label: "Image Hero", name: "image", widget: "image"}
-      - {label: "Note Globale (1-10)", name: "score", widget: "number", min: 1, max: 10}
-      - {label: "Lien Affiliation", name: "affiliate_link", widget: "string"}
-      - {label: "Points Forts", name: "pros", widget: "list", field: {name: "pro", widget: "string"}}
-      - {label: "Points Faibles", name: "cons", widget: "list", field: {name: "con", widget: "string"}}
-      - {label: "Corps", name: "body", widget: "markdown"}
-
-  - name: "tutos"
-    label: "Tutoriels"
-    folder: "src/content/tutos"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Titre Tutoriel", name: "title", widget: "string"}
-      - {label: "Niveau", name: "level", widget: "select", options: ["Débutant", "Intermédiaire", "Expert"]}
-      - {label: "Temps Lecture (min)", name: "read_time", widget: "number"}
-      - {label: "Outils Requis", name: "tools", widget: "list", field: {name: "tool", widget: "string"}}
-      - {label: "Corps", name: "body", widget: "markdown"}
-
-  - name: "news"
-    label: "News Express"
-    folder: "src/content/news"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Titre Accrocheur", name: "title", widget: "string"}
-      - {label: "Source (Lien)", name: "source_link", widget: "string"}
-      - {label: "Tags", name: "tags", widget: "list", field: {name: "tag", widget: "string"}}
-      - {label: "Date de Publication", name: "date", widget: "datetime"}
-      - {label: "Corps", name: "body", widget: "markdown"}
+// Fichier : media-finance-crypto/tailwind.config.mjs
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  theme: {
+    extend: {
+      boxShadow: {
+        'brutal': '4px 4px 0px 0px rgba(0,0,0,1)',
+        'brutal-lg': '8px 8px 0px 0px rgba(0,0,0,1)',
+        'brutal-hover': '2px 2px 0px 0px rgba(0,0,0,1)',
+      },
+      colors: {
+        base: '#ffffff',
+        surface: '#f8fafc',
+        primary: '#fef08a', // Jaune vif
+        secondary: '#bfdbfe', // Bleu vif
+        accent: '#fbcfe8', // Rose vif
+        dark: '#0f172a',
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': theme('colors.dark'),
+            '--tw-prose-headings': theme('colors.dark'),
+            '--tw-prose-links': theme('colors.blue[600]'),
+            '--tw-prose-bold': theme('colors.dark'),
+            '--tw-prose-quotes': theme('colors.dark'),
+            'h1, h2, h3, h4': {
+              fontWeight: '900',
+              textTransform: 'uppercase',
+              letterSpacing: '-0.025em',
+            },
+            'img': {
+              border: '4px solid #000',
+              boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+              borderRadius: '0',
+            },
+            'pre': {
+              border: '4px solid #000',
+              boxShadow: '4px 4px 0px 0px rgba(0,0,0,1)',
+              borderRadius: '0',
+            },
+          },
+        },
+      }),
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
+}

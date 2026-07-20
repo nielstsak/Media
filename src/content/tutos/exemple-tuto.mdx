@@ -1,0 +1,28 @@
+---
+title: "Configuration d'un Cold Wallet et Sécurisation Réseau"
+level: "Expert"
+read_time: 15
+tools:
+  - "Hardware Wallet (ex: Ledger Nano X)"
+  - "Câble Data USB-C sécurisé"
+  - "Générateur d'entropie (optionnel)"
+---
+import ImageZoom from '../../components/ImageZoom.astro';
+import FAQ from '../../components/FAQ.astro';
+
+La sécurisation des clés privées exige une isolation cryptographique totale vis-à-vis des interfaces réseau publiques.
+
+## Protocole d'Initialisation
+
+Générez la phrase mnémonique dans un environnement physiquement isolé (Air-gapped). Ne numérisez sous aucun prétexte la séquence de restauration de 24 mots.
+
+<ImageZoom src="https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=1000&auto=format&fit=crop" alt="Matériel cryptographique isolé" />
+
+## Matrice des Menaces (Threat Model)
+
+L'utilisation de ponts de connexion (Bridges) introduit des vecteurs d'attaque sur la couche de transport.
+
+<FAQ items={[
+  {question: "Pourquoi désactiver le Bluetooth en phase de setup ?", answer: "Pour prévenir l'interception des signaux radioélectriques par attaque man-in-the-middle locale."},
+  {question: "Le firmware doit-il être mis à jour immédiatement ?", answer: "L'installation du dernier micrologiciel officiel réduit la surface de vulnérabilité connue au jour J."}
+]} />

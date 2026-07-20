@@ -12,6 +12,7 @@ cons:
   - "Exige une maîtrise absolue de Python et Pandas"
   - "Configuration stricte de la gestion d'état"
 ---
+{/* Fichier : media-finance-crypto/src/content/reviews/freqtrade-analyse.mdx */}
 import ImageZoom from '../../components/ImageZoom.astro';
 import FAQ from '../../components/FAQ.astro';
 
@@ -29,7 +30,7 @@ Le flux de traitement garantit l'absence totale de biais *look-ahead*. Les dataf
 
 L'exploitation des carnets d'ordres sur les marchés perpétuels exige une gestion du risque centralisée. Contrairement aux modèles ségréguant les portefeuilles par paire (isolated margin), Freqtrade permet une allocation dynamique du capital via le mode *crossed margin*.
 
-L'API de l'exchange (ex: Binance ou Bybit) est interrogée via l'interface CCXT. Le calcul du *Drawdown* et du risque de liquidation est évalué sur l'équité globale du compte, permettant des stratégies de couverture inter-actifs.
+L'API de l'exchange est interrogée via l'interface CCXT. Le calcul du *Drawdown* et du risque de liquidation est évalué sur l'équité globale du compte, permettant des stratégies de couverture inter-actifs.
 
 <FAQ items={[
   {question: "Le framework FreqAI introduit-il de la latence ?", answer: "La latence dépend du modèle d'inférence. Les modèles compilés avec Numba ou utilisant des tenseurs optimisés maintiennent le tick-rate sous les 50ms."},

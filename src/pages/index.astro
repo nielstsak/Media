@@ -9,46 +9,46 @@ const tutos = await getCollection('tutos');
 ---
 <BaseLayout title="Accueil - Media Finance & Crypto" description="Actualités, analyses et tutoriels de l'écosystème web3">
   
-  <section class="mb-20 text-center border-8 border-dark bg-accent p-12 shadow-brutal-lg">
-    <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tight mb-8 text-dark border-b-8 border-dark pb-4 inline-block">
-      Terminal <span class="bg-dark text-accent px-6 py-2">Web3</span>
+  <section class="mb-24 text-center max-w-3xl mx-auto">
+    <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-sand leading-tight">
+      L'intelligence algorithmique au service du Web3.
     </h1>
-    <p class="text-2xl md:text-3xl font-black text-dark max-w-4xl mx-auto bg-white border-4 border-dark inline-block p-4 shadow-brutal">
-      Analyses quantitatives, sécurisation réseau et actualités.
+    <p class="text-lg md:text-xl font-medium text-sand">
+      Recherche quantitative, infrastructure réseau et analyses de protocoles.
     </p>
   </section>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
     
     <section class="lg:col-span-2 space-y-16">
       <div>
-        <div class="flex items-center justify-between mb-10 border-b-8 border-dark pb-4">
-          <h2 class="text-4xl font-black uppercase text-dark bg-primary px-4 py-2 border-4 border-dark shadow-brutal">Analyses</h2>
+        <div class="flex items-center justify-between mb-8 border-b border-surface pb-4">
+          <h2 class="text-2xl font-bold text-sand tracking-tight">Recherche & Analyses</h2>
         </div>
-        <div class="grid grid-cols-1 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {reviews.map(post => (
-            <a href={`/reviews/${post.slug}`} class="block bg-white border-8 border-dark p-8 shadow-brutal hover:translate-x-[6px] hover:translate-y-[6px] hover:shadow-brutal-hover transition-all">
-              <div class="flex justify-between items-start mb-6">
-                <h3 class="text-3xl font-black uppercase text-dark leading-tight">{post.data.title}</h3>
-                <span class="flex items-center justify-center bg-primary border-4 border-dark text-dark font-black text-2xl h-16 w-16 shrink-0 ml-6 shadow-brutal">{post.data.score}</span>
+            <a href={`/reviews/${post.slug}`} class="group flex flex-col bg-surface border border-surface hover:border-accent rounded-xl p-6 transition-all duration-300">
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="text-xl font-semibold text-sand group-hover:text-sand transition-colors leading-snug">{post.data.title}</h3>
+                <span class="flex items-center justify-center bg-deep text-sand font-semibold text-sm h-10 w-10 rounded-full shrink-0 ml-4 border border-accent">{post.data.score}</span>
               </div>
-              <p class="font-bold text-xl text-dark leading-relaxed">{post.data.description}</p>
+              <p class="font-medium text-sand text-sm line-clamp-3 mt-auto leading-relaxed">{post.data.description}</p>
             </a>
           ))}
         </div>
       </div>
 
       <div>
-        <div class="flex items-center justify-between mb-10 border-b-8 border-dark pb-4">
-          <h2 class="text-4xl font-black uppercase text-dark bg-secondary px-4 py-2 border-4 border-dark shadow-brutal">Tutoriels</h2>
+        <div class="flex items-center justify-between mb-8 border-b border-surface pb-4">
+          <h2 class="text-2xl font-bold text-sand tracking-tight">Ingénierie & Tutoriels</h2>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 gap-4">
           {tutos.map(post => (
-            <a href={`/tutos/${post.slug}`} class="flex flex-col bg-white border-8 border-dark p-6 shadow-brutal hover:translate-x-[6px] hover:translate-y-[6px] hover:shadow-brutal-hover transition-all">
-              <h3 class="text-2xl font-black uppercase text-dark mb-6 leading-tight">{post.data.title}</h3>
-              <div class="flex flex-wrap gap-4 mt-auto">
-                <span class="px-4 py-2 bg-white border-4 border-dark text-dark font-black text-sm uppercase shadow-brutal">⏱ {post.data.read_time} min</span>
-                <span class="px-4 py-2 bg-secondary border-4 border-dark text-dark font-black text-sm uppercase shadow-brutal">{post.data.level}</span>
+            <a href={`/tutos/${post.slug}`} class="group flex flex-col sm:flex-row sm:items-center justify-between bg-surface border border-surface hover:border-accent rounded-xl p-5 transition-all duration-300">
+              <h3 class="text-base font-semibold text-sand transition-colors mb-3 sm:mb-0">{post.data.title}</h3>
+              <div class="flex gap-3 shrink-0">
+                <span class="px-3 py-1 bg-deep text-sand rounded-lg text-xs font-medium border border-surface whitespace-nowrap">⏱ {post.data.read_time} min</span>
+                <span class="px-3 py-1 bg-accent text-deep rounded-lg text-xs font-bold whitespace-nowrap">{post.data.level}</span>
               </div>
             </a>
           ))}
@@ -57,25 +57,27 @@ const tutos = await getCollection('tutos');
     </section>
 
     <aside>
-      <div class="sticky top-28 bg-primary border-8 border-dark p-8 shadow-brutal-lg">
-        <h2 class="text-3xl font-black uppercase text-dark mb-8 flex items-center gap-4 border-b-8 border-dark pb-4 bg-white border-4 shadow-brutal px-4 py-2">
-          <span class="w-6 h-6 bg-dark border-4 border-white animate-pulse"></span>
-          Flux Direct
+      <div class="sticky top-24 bg-surface border border-surface rounded-xl p-6">
+        <h2 class="text-lg font-bold text-sand mb-6 flex items-center gap-2">
+          <div class="w-2 h-2 rounded-full bg-sand"></div>
+          Flux Réseau
         </h2>
-        <div class="space-y-8">
+        <div class="space-y-5">
           {news.map(post => (
-            <article class="bg-white border-4 border-dark p-5 shadow-brutal hover:bg-dark hover:text-white transition-colors group">
-              <div class="flex flex-wrap gap-3 mb-4">
-                {post.data.tags.map((tag: string) => (
-                  <span class="px-3 py-1 bg-accent text-dark border-2 border-dark text-xs font-black uppercase">#{tag}</span>
-                ))}
-              </div>
-              <a href={`/news/${post.slug}`} class="block text-xl font-black uppercase leading-tight mb-3 group-hover:text-primary">
+            <article class="border-b border-deep pb-5 last:border-0 last:pb-0">
+              <a href={`/news/${post.slug}`} class="block text-sm font-semibold text-sand leading-snug mb-2 hover:text-accent transition-colors">
                 {post.data.title}
               </a>
-              <time class="text-sm font-black text-dark group-hover:text-white border-t-4 border-dark group-hover:border-white pt-2 block w-full">
-                {new Date(post.data.date).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-              </time>
+              <div class="flex items-center justify-between">
+                <time class="text-xs font-medium text-sand">
+                  {new Date(post.data.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' })}
+                </time>
+                <div class="flex gap-2">
+                  {post.data.tags.slice(0, 1).map((tag: string) => (
+                    <span class="text-[10px] font-bold text-deep bg-sand px-2 py-0.5 rounded-md">{tag}</span>
+                  ))}
+                </div>
+              </div>
             </article>
           ))}
         </div>
