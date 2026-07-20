@@ -6,16 +6,15 @@ const reviews = await getCollection('reviews');
 const tutos = await getCollection('tutos');
 const news = await getCollection('news');
 ---
-<BaseLayout titreDocument="Accueil" descriptionDocument="L'intelligence algorithmique au service du Web3">
+<BaseLayout titreDocument="Accueil" descriptionDocument="Web3 décrypté">
   <section class="text-center my-16">
-    <h1 class="text-h1 font-bold text-[#DFD0B8] mb-4">L'intelligence algorithmique<br/>au service du Web3.</h1>
-    <p class="text-[#DFD0B8] text-lg">Recherche quantitative, infrastructure réseau et analyses de protocoles.</p>
+    <h1 class="text-h1 font-bold text-[#DFD0B8] mb-4">Web3 décrypté</h1>
   </section>
 
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <div class="lg:col-span-2 flex flex-col gap-12">
       <section>
-        <h2 class="text-h2 font-bold text-[#DFD0B8] mb-4 border-b border-[#948979] pb-2">Recherche & Analyses</h2>
+        <h2 class="text-h2 font-bold text-[#DFD0B8] mb-4 border-b border-[#948979] pb-2">Analyses</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {reviews.slice(0, 2).map(entry => (
             <a href={`/reviews/${entry.slug}`} class="card-interactive p-6 h-full text-left">
@@ -27,7 +26,7 @@ const news = await getCollection('news');
       </section>
 
       <section>
-        <h2 class="text-h2 font-bold text-[#DFD0B8] mb-4 border-b border-[#948979] pb-2">Ingénierie & Tutoriels</h2>
+        <h2 class="text-h2 font-bold text-[#DFD0B8] mb-4 border-b border-[#948979] pb-2">Projets & Tutoriels</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {tutos.slice(0, 2).map(entry => (
             <a href={`/tutos/${entry.slug}`} class="card-interactive p-6 h-full text-left">
@@ -44,7 +43,7 @@ const news = await getCollection('news');
 
     <div class="lg:col-span-1">
       <section class="card-interactive p-6 h-full">
-        <h2 class="text-h3 font-bold text-[#DFD0B8] mb-6">Flux Réseau</h2>
+        <h2 class="text-h3 font-bold text-[#DFD0B8] mb-6">Actualités</h2>
         <div class="flex flex-col gap-6">
           {news.slice(0, 4).map(entry => (
             <a href={`/news/${entry.slug}`} class="group block border-b border-[#948979]/30 pb-4 last:border-0 last:pb-0 outline-none">

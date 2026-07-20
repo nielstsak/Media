@@ -8,11 +8,14 @@ const reviewEntries = await getCollection('reviews');
   <h1 class="text-h1 font-bold mb-8 text-white" transition:name="header-reviews">Recherche</h1>
   <div class="flex flex-col gap-4">
     {reviewEntries.map((entry, index) => (
-      <article class="scroll-reveal opacity-0 translate-y-4 transition-all duration-500 ease-out card-noise border border-[#948979] p-4 hover:scale-[1.02]" style={`transition-delay: ${index * 100}ms`}>
-        <h2 class="text-h3 font-bold text-[#DFD0B8]">
-          <a href={`/reviews/${entry.slug}`} transition:name={`title-${entry.slug}`} class="block outline-none">{entry.data.title}</a>
+      <a href={`/reviews/${entry.slug}`} class="card-interactive p-6 scroll-reveal opacity-0 translate-y-4 transition-all duration-500 ease-out" style={`transition-delay: ${index * 100}ms`}>
+        <h2 class="text-h3 font-bold text-[#DFD0B8] mb-2" transition:name={`title-${entry.slug}`}>
+          {entry.data.title}
         </h2>
-      </article>
+        <div class="text-sm text-[#DFD0B8] opacity-80 mt-auto">
+          {entry.data.description}
+        </div>
+      </a>
     ))}
   </div>
 </BaseLayout>
