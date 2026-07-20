@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const tutosEntries = await getCollection('tutos');
+---
+<BaseLayout titreDocument="Projets et tutoriels" descriptionDocument="Ingénierie et tutoriels" typeRoute="tutos">
+  <h1 class="text-h1 font-bold mb-8 text-white">Projets et tutoriels</h1>
+  <div class="flex flex-col gap-4">
+    {tutosEntries.map(entry => (
+      <article class="bg-[#393E46] border border-[#948979] p-4">
+        <h2 class="text-h3 font-bold text-[#DFD0B8]">
+          <a href={`/tutos/${entry.slug}`}>{entry.data.title}</a>
+        </h2>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

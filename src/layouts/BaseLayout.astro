@@ -1,11 +1,11 @@
 ---
 import { SEO } from 'astro-seo';
+import { ViewTransitions } from 'astro:transitions';
 import Search from '../components/Search.astro';
 import SchemaGenerator from '../components/SchemaGenerator.astro';
 
 const { titreDocument, descriptionDocument, typeRoute, donneesFrontmatter } = Astro.props;
 ---
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,28 +15,26 @@ const { titreDocument, descriptionDocument, typeRoute, donneesFrontmatter } = As
     title={titreDocument}
     description={descriptionDocument}
   />
+  <ViewTransitions />
   {donneesFrontmatter && <SchemaGenerator typeRoute={typeRoute} donneesFrontmatter={donneesFrontmatter} />}
 </head>
 <body class="bg-[#222831] text-[#DFD0B8] min-h-screen flex flex-col font-sans">
-
   <header data-pagefind-ignore class="bg-[#393E46] p-6 border-b-4 border-[#948979] flex justify-between items-center">
     <nav>
       <ul class="flex gap-6">
         <li><a href="/" class="hover:text-white font-bold uppercase tracking-wider">Accueil</a></li>
         <li><a href="/news" class="hover:text-white font-bold uppercase tracking-wider">Actualités</a></li>
-        <li><a href="/tutos" class="hover:text-white font-bold uppercase tracking-wider">Tutoriels</a></li>
+        <li><a href="/reviews" class="hover:text-white font-bold uppercase tracking-wider">Recherche</a></li>
+        <li><a href="/tutos" class="hover:text-white font-bold uppercase tracking-wider">Projets et tutoriels</a></li>
       </ul>
     </nav>
     <Search />
   </header>
-
   <main class="flex-grow p-6 lg:p-12 max-w-6xl mx-auto w-full">
     <slot />
   </main>
-
   <footer data-pagefind-ignore class="bg-[#393E46] p-6 border-t-4 border-[#948979] mt-auto text-center shadow-[-4px_0_10px_rgba(0,0,0,0.5)]">
     <p class="text-sm font-bold tracking-widest uppercase">&copy; 2026 Media Finance & Crypto</p>
   </footer>
-
 </body>
 </html>
