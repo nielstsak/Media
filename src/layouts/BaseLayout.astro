@@ -19,7 +19,7 @@ const { title, description } = Astro.props;
     </style>
   </head>
   <body class="bg-deep text-sand min-h-screen flex flex-col font-sans selection:bg-sand selection:text-deep">
-    <header class="sticky top-0 z-40 w-full bg-deep/90 backdrop-blur-md border-b border-surface">
+    <header class="sticky top-0 z-40 w-full bg-deep/95 backdrop-blur-md border-b border-surface">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <a href="/" class="text-lg font-bold tracking-tight text-sand flex items-center gap-2">
           <div class="w-2 h-2 rounded-full bg-accent"></div>
@@ -27,9 +27,9 @@ const { title, description } = Astro.props;
         </a>
         <nav class="hidden md:flex gap-8 font-medium text-sm text-sand">
           <a href="/" class="hover:text-accent transition-colors">Accueil</a>
-          <a href="#" class="hover:text-accent transition-colors">Analyses</a>
-          <a href="#" class="hover:text-accent transition-colors">Tutoriels</a>
-          <a href="#" class="hover:text-accent transition-colors">News</a>
+          <a href="/#analyses" class="hover:text-accent transition-colors">Analyses</a>
+          <a href="/#tutoriels" class="hover:text-accent transition-colors">Tutoriels</a>
+          <a href="/#news" class="hover:text-accent transition-colors">News</a>
         </nav>
       </div>
     </header>

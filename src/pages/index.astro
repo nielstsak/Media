@@ -18,37 +18,34 @@ const tutos = await getCollection('tutos');
     </p>
   </section>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
     
     <section class="lg:col-span-2 space-y-16">
-      <div>
+      <div id="analyses" class="scroll-mt-24">
         <div class="flex items-center justify-between mb-8 border-b border-surface pb-4">
           <h2 class="text-2xl font-bold text-sand tracking-tight">Recherche & Analyses</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {reviews.map(post => (
-            <a href={`/reviews/${post.slug}`} class="group flex flex-col bg-surface border border-surface hover:border-accent rounded-xl p-6 transition-all duration-300">
-              <div class="flex justify-between items-start mb-4">
-                <h3 class="text-xl font-semibold text-sand group-hover:text-sand transition-colors leading-snug">{post.data.title}</h3>
-                <span class="flex items-center justify-center bg-deep text-sand font-semibold text-sm h-10 w-10 rounded-full shrink-0 ml-4 border border-accent">{post.data.score}</span>
-              </div>
+            <a href={`/reviews/${post.slug}`} class="group flex flex-col bg-surface border border-surface hover:border-accent rounded-xl p-6 transition-all duration-300 h-full">
+              <h3 class="text-xl font-semibold text-sand group-hover:text-sand transition-colors leading-snug mb-4">{post.data.title}</h3>
               <p class="font-medium text-sand text-sm line-clamp-3 mt-auto leading-relaxed">{post.data.description}</p>
             </a>
           ))}
         </div>
       </div>
 
-      <div>
+      <div id="tutoriels" class="scroll-mt-24">
         <div class="flex items-center justify-between mb-8 border-b border-surface pb-4">
           <h2 class="text-2xl font-bold text-sand tracking-tight">Ingénierie & Tutoriels</h2>
         </div>
-        <div class="grid grid-cols-1 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {tutos.map(post => (
-            <a href={`/tutos/${post.slug}`} class="group flex flex-col sm:flex-row sm:items-center justify-between bg-surface border border-surface hover:border-accent rounded-xl p-5 transition-all duration-300">
-              <h3 class="text-base font-semibold text-sand transition-colors mb-3 sm:mb-0">{post.data.title}</h3>
-              <div class="flex gap-3 shrink-0">
-                <span class="px-3 py-1 bg-deep text-sand rounded-lg text-xs font-medium border border-surface whitespace-nowrap">⏱ {post.data.read_time} min</span>
-                <span class="px-3 py-1 bg-accent text-deep rounded-lg text-xs font-bold whitespace-nowrap">{post.data.level}</span>
+            <a href={`/tutos/${post.slug}`} class="group flex flex-col bg-surface border border-surface hover:border-accent rounded-xl p-6 transition-all duration-300 h-full">
+              <h3 class="text-xl font-semibold text-sand transition-colors mb-4">{post.data.title}</h3>
+              <div class="mt-auto pt-4 border-t border-deep flex items-center justify-between">
+                <span class="text-sm font-medium text-accent group-hover:text-sand transition-colors">Consulter le guide</span>
+                <svg class="w-4 h-4 text-accent group-hover:text-sand transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </div>
             </a>
           ))}
@@ -56,7 +53,7 @@ const tutos = await getCollection('tutos');
       </div>
     </section>
 
-    <aside>
+    <aside id="news" class="scroll-mt-24">
       <div class="sticky top-24 bg-surface border border-surface rounded-xl p-6">
         <h2 class="text-lg font-bold text-sand mb-6 flex items-center gap-2">
           <div class="w-2 h-2 rounded-full bg-sand"></div>
