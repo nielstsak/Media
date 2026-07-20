@@ -1,0 +1,19 @@
+---
+const { typeRoute, donneesFrontmatter } = Astro.props;
+
+const typeSchemaDocument = typeRoute === 'tutos' ? 'TechArticle' : 'Article';
+
+const objetJsonLd = {
+  "@context": "https://schema.org",
+  "@type": typeSchemaDocument,
+  "headline": donneesFrontmatter.title,
+  "description": donneesFrontmatter.description,
+  "datePublished": donneesFrontmatter.pubDate,
+  "author": {
+    "@type": "Person",
+    "name": donneesFrontmatter.author
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(objetJsonLd)} />
