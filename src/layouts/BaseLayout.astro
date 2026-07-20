@@ -17,24 +17,64 @@ const { titreDocument, descriptionDocument, typeRoute, donneesFrontmatter } = As
   />
   <ViewTransitions />
   {donneesFrontmatter && <SchemaGenerator typeRoute={typeRoute} donneesFrontmatter={donneesFrontmatter} />}
+  <style is:global>
+    h1, h2, h3, h4, h5, h6 {
+      transition: all 0.3s ease-in-out;
+    }
+    h1:hover, h2:hover, h3:hover {
+      letter-spacing: 0.1em;
+      font-weight: 900;
+    }
+    .nav-glitch:hover {
+      animation: glitch 0.3s ease-in-out infinite;
+    }
+    .svg-noise {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      opacity: 0.05;
+      mix-blend-mode: overlay;
+    }
+  </style>
 </head>
-<body class="bg-[#222831] text-[#DFD0B8] min-h-screen flex flex-col font-sans">
-  <header data-pagefind-ignore class="bg-[#393E46] p-6 border-b-4 border-[#948979] flex justify-between items-center">
+<body class="bg-[#222831] text-[#DFD0B8] min-h-screen flex flex-col font-sans relative">
+  <svg class="svg-noise">
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noise)"/>
+  </svg>
+
+  <header data-pagefind-ignore class="bg-[#393E46] p-6 border-b-4 border-[#948979] flex justify-between items-center relative z-10 transition-colors">
     <nav>
       <ul class="flex gap-6">
-        <li><a href="/" class="hover:text-white font-bold uppercase tracking-wider">Accueil</a></li>
-        <li><a href="/news" class="hover:text-white font-bold uppercase tracking-wider">Actualités</a></li>
-        <li><a href="/reviews" class="hover:text-white font-bold uppercase tracking-wider">Recherche</a></li>
-        <li><a href="/tutos" class="hover:text-white font-bold uppercase tracking-wider">Projets et tutoriels</a></li>
+        <li><a href="/" class="nav-glitch hover:text-white font-bold uppercase tracking-wider block transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#948979]">Accueil</a></li>
+        <li><a href="/news" class="nav-glitch hover:text-white font-bold uppercase tracking-wider block transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#948979]">Actualités</a></li>
+        <li><a href="/reviews" class="nav-glitch hover:text-white font-bold uppercase tracking-wider block transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#948979]">Recherche</a></li>
+        <li><a href="/tutos" class="nav-glitch hover:text-white font-bold uppercase tracking-wider block transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[4px_4px_0px_#948979]">Projets et tutoriels</a></li>
       </ul>
     </nav>
     <Search />
   </header>
-  <main class="flex-grow p-6 lg:p-12 max-w-6xl mx-auto w-full">
+
+  <main class="flex-grow p-6 lg:p-12 max-w-6xl mx-auto w-full relative z-10">
     <slot />
   </main>
-  <footer data-pagefind-ignore class="bg-[#393E46] p-6 border-t-4 border-[#948979] mt-auto text-center shadow-[-4px_0_10px_rgba(0,0,0,0.5)]">
+
+  <footer data-pagefind-ignore class="bg-[#393E46] p-6 border-t-4 border-[#948979] mt-auto text-center shadow-[-4px_0_10px_rgba(0,0,0,0.5)] relative z-10">
     <p class="text-sm font-bold tracking-widest uppercase">&copy; 2026 Media Finance & Crypto</p>
   </footer>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      window.addEventListener('scroll', () => {
+        document.documentElement.style.setProperty('--scroll-y', `${window.scrollY}px`);
+      }, { passive: true });
+    });
+  </script>
 </body>
 </html>

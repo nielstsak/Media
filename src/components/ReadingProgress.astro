@@ -1,0 +1,20 @@
+---
+---
+<div id="barre-progression" class="fixed top-0 left-0 h-1 bg-[#DFD0B8] w-0 z-50 origin-left"></div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const barre = document.getElementById('barre-progression');
+    if (!barre) return;
+
+    const majProgression = () => {
+      const hauteurTotale = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progression = (window.scrollY / hauteurTotale) * 100;
+      barre.style.width = `${progression}%`;
+    };
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(majProgression);
+    }, { passive: true });
+  });
+</script>
