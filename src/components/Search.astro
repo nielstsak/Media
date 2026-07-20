@@ -1,0 +1,21 @@
+---
+import Pagefind from 'astro-pagefind/components/Search';
+---
+
+<div class="search-container">
+  <Pagefind id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+</div>
+
+<style is:global>
+  :root {
+    --pagefind-ui-scale: 0.8;
+    --pagefind-ui-primary: #DFD0B8;
+    --pagefind-ui-text: #DFD0B8;
+    --pagefind-ui-background: #222831;
+    --pagefind-ui-border: #948979;
+    --pagefind-ui-tag: #393E46;
+    --pagefind-ui-border-width: 2px;
+    --pagefind-ui-border-radius: 0px;
+    --pagefind-ui-font: sans-serif;
+  }
+</style>
