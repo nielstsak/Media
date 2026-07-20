@@ -1,0 +1,23 @@
+---
+const { command } = Astro.props;
+const elementId = `term-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class="bg-[#222831] border-l-4 border-[#948979] p-4 flex justify-between items-center my-4">
+  <input type="text" value={command} readonly class="bg-transparent text-[#DFD0B8] font-mono text-sm w-full outline-none" id={elementId} />
+  <button data-copy={elementId} class="ml-4 bg-[#393E46] px-3 py-1 text-xs text-[#DFD0B8] uppercase font-bold cursor-pointer">Copier</button>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('[data-copy]');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-copy');
+      const input = document.getElementById(targetId) as HTMLInputElement;
+      if (input) {
+        input.select();
+        navigator.clipboard.writeText(input.value);
+      }
+    });
+  });
+</script>

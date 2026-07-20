@@ -1,0 +1,11 @@
+---
+const { symbol } = Astro.props;
+const response = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=${symbol}`);
+const data = await response.json();
+const price = data.price ? parseFloat(data.price).toFixed(4) : 'N/A';
+---
+
+<span class="inline-flex items-center gap-2 bg-[#393E46] border border-[#948979] px-2 py-1 rounded-sm font-mono text-sm">
+  <span class="text-[#DFD0B8] font-bold">{symbol}</span>
+  <span class="text-white">{price}</span>
+</span>

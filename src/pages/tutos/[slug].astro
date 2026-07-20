@@ -1,19 +1,26 @@
 ---
-// Fichier : media-finance-crypto/src/pages/tutos/[slug].astro
 import { getCollection } from 'astro:content';
 import TutoLayout from '../../layouts/TutoLayout.astro';
+import TerminalBlock from '../../components/TerminalBlock.astro';
+import MetricsFetch from '../../components/MetricsFetch.astro';
 
 export async function getStaticPaths() {
   const tutosEntries = await getCollection('tutos');
   return tutosEntries.map(entry => ({
-    params: { slug: entry.slug }, 
+    params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
+
+const mdxComponents = {
+  TerminalBlock,
+  MetricsFetch
+};
 ---
-<TutoLayout frontmatter={entry.data}>
-  <Content />
+
+<TutoLayout frontmatter={entry.data} headings={headings}>
+  <Content components={mdxComponents} />
 </TutoLayout>

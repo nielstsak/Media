@@ -1,19 +1,26 @@
 ---
-// Fichier : media-finance-crypto/src/pages/news/[slug].astro
 import { getCollection } from 'astro:content';
 import NewsLayout from '../../layouts/NewsLayout.astro';
+import TerminalBlock from '../../components/TerminalBlock.astro';
+import MetricsFetch from '../../components/MetricsFetch.astro';
 
 export async function getStaticPaths() {
   const newsEntries = await getCollection('news');
   return newsEntries.map(entry => ({
-    params: { slug: entry.slug }, 
+    params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+const mdxComponents = {
+  TerminalBlock,
+  MetricsFetch
+};
 ---
+
 <NewsLayout frontmatter={entry.data}>
-  <Content />
+  <Content components={mdxComponents} />
 </NewsLayout>

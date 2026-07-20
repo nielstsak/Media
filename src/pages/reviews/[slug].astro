@@ -1,19 +1,26 @@
 ---
-// Fichier : media-finance-crypto/src/pages/reviews/[slug].astro
 import { getCollection } from 'astro:content';
 import ReviewLayout from '../../layouts/ReviewLayout.astro';
+import TerminalBlock from '../../components/TerminalBlock.astro';
+import MetricsFetch from '../../components/MetricsFetch.astro';
 
 export async function getStaticPaths() {
-  const reviewsEntries = await getCollection('reviews');
-  return reviewsEntries.map(entry => ({
-    params: { slug: entry.slug }, 
+  const reviewEntries = await getCollection('reviews');
+  return reviewEntries.map(entry => ({
+    params: { slug: entry.slug },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
+
+const mdxComponents = {
+  TerminalBlock,
+  MetricsFetch
+};
 ---
-<ReviewLayout frontmatter={entry.data}>
-  <Content />
+
+<ReviewLayout frontmatter={entry.data} headings={headings}>
+  <Content components={mdxComponents} />
 </ReviewLayout>
