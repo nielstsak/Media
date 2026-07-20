@@ -1,6 +1,9 @@
 ---
+import { SEO } from 'astro-seo';
 import Search from '../components/Search.astro';
-const { titreDocument, descriptionDocument } = Astro.props;
+import SchemaGenerator from '../components/SchemaGenerator.astro';
+
+const { titreDocument, descriptionDocument, typeRoute, donneesFrontmatter } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -8,8 +11,11 @@ const { titreDocument, descriptionDocument } = Astro.props;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{titreDocument}</title>
-  <meta name="description" content={descriptionDocument} />
+  <SEO
+    title={titreDocument}
+    description={descriptionDocument}
+  />
+  {donneesFrontmatter && <SchemaGenerator typeRoute={typeRoute} donneesFrontmatter={donneesFrontmatter} />}
 </head>
 <body class="bg-[#222831] text-[#DFD0B8] min-h-screen flex flex-col font-sans">
 
